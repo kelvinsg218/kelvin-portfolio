@@ -11,7 +11,8 @@
     "preview": "vite preview --port 4173",
     "test": "vitest run",
     "check": "npm run test && npm run build",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "promo": "node scripts/build-promo.mjs"
   },
   "devDependencies": {
     "jsdom": "25.0.1",

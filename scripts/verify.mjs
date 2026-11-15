@@ -31,7 +31,17 @@ for (const vp of viewports) {
   });
   const page = await ctx.newPage();
   const errors = [];
-  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  const ignored = [];
+  page.on('console', (m) => {
+    if (m.type() !== 'error') return;
+    const src = m.location()?.url || '';
+    // Conhecidos e esperados: limite da API pública do GitHub (o site usa o fallback)
+    // e o HUD que o Netlify injeta, bloqueado pela CSP do site.
+    if (src.includes('api.github.com')) return ignored.push('GitHub API indisponível/limitada (fallback ativo)');
+    if (src.includes('/.netlify/scripts/hud') || (src === 'about:srcdoc' && m.text().includes('Content Security Policy')))
+      return ignored.push('Netlify HUD bloqueado pela CSP');
+    errors.push(`${m.text()} @ ${src}`);
+  });
   page.on('pageerror', (e) => errors.push(e.message));
   const failed = [];
   page.on('response', (r) => r.status() >= 400 && !r.url().includes('api.github.com') && failed.push(`${r.status()} ${r.url()}`));
@@ -54,7 +64,7 @@ for (const vp of viewports) {
   );
   check(`[${vp.name}] imagens carregadas`, broken.length === 0, broken.join(', '));
   check(`[${vp.name}] sem respostas 4xx/5xx`, failed.length === 0, failed.join(', '));
-  check(`[${vp.name}] sem erros de console`, errors.length === 0, errors.join(' | '));
+  check(`[${vp.name}] sem erros de console`, errors.length === 0, errors.join(' | ') || [...new Set(ignored)].map((i) => `ignorado: ${i}`).join('; '));
 
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   check(`[${vp.name}] sem rolagem horizontal`, overflow <= 0, `excesso ${overflow}px`);

@@ -6,3 +6,4 @@ dist/
 Thumbs.db
 # a fotografia original é apenas referência e não é publicada
 assets-src/foto-original*
+publicacao/.capturas/
