@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>%TITLE%</title>
+    <meta name="description" content="%DESCRIPTION%" />
+    <meta name="author" content="Kelvin Garcia" />
+    <meta name="theme-color" content="#0d0b0a" />
+    <link rel="canonical" href="%URL%/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="KELVIN.DEV" />
+    <meta property="og:title" content="%TITLE%" />
+    <meta property="og:description" content="%HEADLINE% %SUBHEADLINE%" />
+    <meta property="og:url" content="%URL%/" />
+    <meta property="og:image" content="%URL%/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ilustração de Kelvin Garcia em sua mesa de trabalho com o texto KELVIN.DEV" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="%TITLE%" />
+    <meta name="twitter:description" content="%HEADLINE%" />
+    <meta name="twitter:image" content="%URL%/og-image.jpg" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preload" as="image" type="image/avif"
+      imagesrcset="/img/hero-640.avif 640w, /img/hero-960.avif 960w, /img/hero-1280.avif 1280w, /img/hero-1672.avif 1672w"
+      imagesizes="100vw" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!--@jsonld-->
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="nav" data-nav>
+      <a class="nav__brand" href="#inicio" aria-label="KELVIN.DEV — início">KELVIN<span>.DEV</span></a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="sr-only">Abrir menu</span><span class="nav__bars" aria-hidden="true"></span>
+      </button>
+      <nav id="menu" class="nav__menu" aria-label="Principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#trajetoria">Trajetória</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#terminal">Terminal</a>
+        <a class="nav__cta" href="#contato">Contato</a>
+      </nav>
+    </header>
+
+    <main id="conteudo">
+      <!-- HERO -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero__art" data-lqip>
+          <picture>
+            <source type="image/avif" srcset="/img/hero-640.avif 640w, /img/hero-960.avif 960w, /img/hero-1280.avif 1280w, /img/hero-1672.avif 1672w" sizes="100vw" />
+            <source type="image/webp" srcset="/img/hero-640.webp 640w, /img/hero-960.webp 960w, /img/hero-1280.webp 1280w, /img/hero-1672.webp 1672w" sizes="100vw" />
+            <img src="/img/hero-1280.jpg" width="1672" height="941" fetchpriority="high" decoding="async"
+              alt="Ilustração de Kelvin Garcia de boné e moletom, sentado diante de um notebook, cercado por ícones de código, terminal e ferramentas" />
+          </picture>
+
+          <!-- Elementos SVG complementares, animados ao redor da ilustração -->
+          <svg class="fx fx--circuit" viewBox="0 0 400 220" aria-hidden="true">
+            <path d="M0 180 H120 L160 140 H260 L300 100 H400" />
+            <path d="M40 210 H180 L210 180 H330" />
+            <circle cx="120" cy="180" r="4" /><circle cx="260" cy="140" r="4" /><circle cx="330" cy="180" r="4" />
+          </svg>
+          <svg class="fx fx--spark fx--s1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 14 10 24 12 14 14 12 24 10 14 0 12 10 10Z" /></svg>
+          <svg class="fx fx--spark fx--s2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 14 10 24 12 14 14 12 24 10 14 0 12 10 10Z" /></svg>
+          <svg class="fx fx--spark fx--s3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 14 10 24 12 14 14 12 24 10 14 0 12 10 10Z" /></svg>
+          <span class="fx fx--code" aria-hidden="true">{ }</span>
+        </div>
+
+        <div class="hero__content">
+          <p class="eyebrow hero__in" style="--d:0">Kelvin Garcia · Creative Developer</p>
+          <h1 id="hero-title" class="hero__title hero__in" style="--d:1">
+            Da resolução de problemas <em>à criação de soluções.</em>
+          </h1>
+          <p class="hero__lead hero__in" style="--d:2">%SUBHEADLINE%</p>
+          <div class="hero__actions hero__in" style="--d:3">
+            <a class="btn btn--primary" href="#projetos">Ver projetos</a>
+            <a class="btn btn--ghost" href="%GITHUB%" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <p class="hero__prompt hero__in" style="--d:4" aria-hidden="true"><span>~/kelvin</span> $ <span data-typed>suporte → implantação → código</span><i class="cursor"></i></p>
+        </div>
+        <a class="hero__scroll" href="#sobre" aria-label="Rolar para Sobre"><span></span></a>
+      </section>
+
+      <!-- SOBRE -->
+      <section class="section about" id="sobre" aria-labelledby="sobre-title">
+        <div class="wrap about__grid">
+          <div class="reveal">
+            <p class="eyebrow">01 · Sobre</p>
+            <h2 id="sobre-title" class="section__title">Aprendi tecnologia resolvendo problemas de verdade.</h2>
+          </div>
+          <div class="about__text reveal">
+            <p>
+              Comecei na TI atendendo pessoas: computadores que não ligavam, impressoras paradas, redes instáveis
+              e sistemas que precisavam funcionar no mesmo dia. No suporte e na implantação de sistemas, aprendi a
+              diagnosticar com calma, documentar o que faço e explicar soluções de forma simples.
+            </p>
+            <p>
+              Hoje curso Sistemas de Informação e levo essas experiências para o código. Meus projetos nasceram de
+              situações que vivi no suporte: manutenção repetitiva, diagnóstico de máquinas e controle de periféricos.
+            </p>
+            <p class="about__note">
+              Uso ferramentas de inteligência artificial como apoio ao estudo, à implementação e à revisão dos projetos —
+              e procuro entender cada decisão técnica que entra no código.
+            </p>
+          </div>
+        </div>
+        <ul class="wrap stats reveal" aria-label="Resumo">
+          <li><strong>2</strong><span>experiências em TI</span></li>
+          <li><strong>%PROJECT_COUNT%</strong><span>projetos publicados com release</span></li>
+          <li><strong>N1/N2</strong><span>atendimento e suporte técnico</span></li>
+          <li><strong>SI</strong><span>Sistemas de Informação, em andamento</span></li>
+        </ul>
+      </section>
+
+      <!-- TRAJETÓRIA -->
+      <section class="section journey" id="trajetoria" aria-labelledby="trajetoria-title">
+        <div class="wrap">
+          <p class="eyebrow reveal">02 · Trajetória</p>
+          <h2 id="trajetoria-title" class="section__title reveal">Do atendimento ao desenvolvimento.</h2>
+          <ol class="timeline">
+            <li class="timeline__item reveal">
+              <span class="timeline__when">2025 – 2026</span>
+              <h3>Auxiliar de TI · Serra Park</h3>
+              <p>Suporte a usuários, diagnóstico e manutenção de computadores, impressoras, scanners e periféricos.
+                Rotinas com Windows, redes, DHCP, acesso remoto, inventário de equipamentos e solução de incidentes.</p>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__when">2026</span>
+              <h3>Assistente de Implantação Júnior · Gênesis</h3>
+              <p>Implantação e suporte ao sistema Clinux: orientação a usuários, acompanhamento de configurações e
+                atendimento técnico N1/N2.</p>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__when">2026</span>
+              <h3>Projetos próprios de software</h3>
+              <p>Ferramentas para Windows em Python e C#/.NET, publicadas no GitHub com executáveis, testes e
+                documentação — cada uma inspirada em um problema real do suporte.</p>
+            </li>
+            <li class="timeline__item timeline__item--now reveal">
+              <span class="timeline__when">Em andamento</span>
+              <h3>Bacharelado em Sistemas de Informação · UCL / UVV</h3>
+              <p>Estudando também Go, AWS e Azure.</p>
+            </li>
+          </ol>
+
+          <div class="skills">
+            <div class="skills__group reveal">
+              <h3>Suporte &amp; infraestrutura</h3>
+              <ul class="chips">
+                <li>Windows 10/11</li><li>Redes e DHCP</li><li>Acesso remoto</li><li>Hardware e periféricos</li>
+                <li>Implantação de sistemas</li><li>Atendimento N1/N2</li><li>Inventário de TI</li>
+              </ul>
+            </div>
+            <div class="skills__group reveal">
+              <h3>Desenvolvimento</h3>
+              <ul class="chips">
+                <li>Python</li><li>C# / .NET</li><li>WPF</li><li>Tkinter</li><li>SQLite / EF Core</li>
+                <li>JavaScript / Node.js</li><li>PowerShell</li><li>Git / GitHub</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJETOS -->
+      <section class="section projects" id="projetos" aria-labelledby="projetos-title">
+        <div class="wrap">
+          <p class="eyebrow reveal">03 · Projetos</p>
+          <h2 id="projetos-title" class="section__title reveal">Ferramentas que nasceram do suporte.</h2>
+          <p class="section__lead reveal">Três aplicativos para Windows, com código aberto, executáveis publicados e documentação.</p>
+          <div class="projects__list">
+            <!--@projects-->
+          </div>
+        </div>
+      </section>
+
+      <!-- TERMINAL -->
+      <section class="section term-section" id="terminal" aria-labelledby="terminal-title">
+        <div class="wrap">
+          <p class="eyebrow reveal">04 · Terminal</p>
+          <h2 id="terminal-title" class="section__title reveal">Prefere a linha de comando?</h2>
+          <div class="terminal reveal" data-terminal>
+            <div class="terminal__bar" aria-hidden="true"><i></i><i></i><i></i><span>kelvin@dev: ~</span></div>
+            <div class="terminal__out" data-term-out role="log" aria-live="polite">
+              <p>Bem-vindo ao KELVIN.DEV. Digite <b>help</b> para ver os comandos.</p>
+            </div>
+            <form class="terminal__form" data-term-form autocomplete="off">
+              <label for="term-input"><span aria-hidden="true">$</span><span class="sr-only">Comando</span></label>
+              <input id="term-input" name="cmd" type="text" spellcheck="false" autocapitalize="off" placeholder="help" data-term-input />
+            </form>
+            <div class="terminal__hints" aria-label="Atalhos">
+              <button type="button" data-cmd="sobre">sobre</button>
+              <button type="button" data-cmd="projetos">projetos</button>
+              <button type="button" data-cmd="stack">stack</button>
+              <button type="button" data-cmd="contato">contato</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTATO -->
+      <section class="section contact" id="contato" aria-labelledby="contato-title">
+        <div class="wrap contact__grid">
+          <div class="reveal">
+            <p class="eyebrow">05 · Contato</p>
+            <h2 id="contato-title" class="section__title">Vamos conversar?</h2>
+            <p class="section__lead">Estou aberto a oportunidades em TI — suporte, implantação e desenvolvimento —
+              presenciais em Serra/Vitória ou remotas.</p>
+          </div>
+          <div class="contact__links reveal">
+            <a class="contact__link contact__link--main" href="mailto:%EMAIL%"><span>E-mail</span><small>%EMAIL%</small></a>
+            <button class="contact__copy" type="button" data-copy="%EMAIL%">Copiar e-mail</button>
+            <a class="contact__link" href="%GITHUB%" target="_blank" rel="noopener"><span>GitHub</span><small>github.com/%GITHUB_USER%</small></a>
+            <!--@linkedin-->
+            <p class="contact__loc">%LOCATION%</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <p><b>KELVIN<span>.DEV</span></b> · © %YEAR% Kelvin Garcia</p>
+        <p><a href="%REPO%" target="_blank" rel="noopener">Código-fonte deste site</a></p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
