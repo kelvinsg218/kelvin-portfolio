@@ -18,7 +18,7 @@ function portfolioHtml() {
         if (problems.length) throw new Error(`src/data/projects.js inválido:\n${problems.join('\n')}`);
 
         const linkedin = site.linkedin
-          ? `<a class="contact__link" href="${esc(site.linkedin)}" target="_blank" rel="noopener"><span>LinkedIn</span><small>${esc(site.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</small></a>`
+          ? `<a class="contact__link" href="${esc(site.linkedin)}" target="_blank" rel="noopener"><span>LinkedIn</span><small>${esc(decodeURIComponent(site.linkedin).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</small></a>`
           : '';
 
         const jsonLd = JSON.stringify({

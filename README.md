@@ -77,7 +77,7 @@ Para o `verify`, instale uma vez o navegador headless: `npx playwright-core inst
 
 > O teste `contém exatamente os três projetos autorizados` existe para evitar inclusões acidentais; atualize-o junto ao adicionar um projeto.
 
-Contatos e links ficam em [`src/data/site.js`](src/data/site.js) (para exibir o LinkedIn, preencha `linkedin`).
+Contatos e links ficam em [`src/data/site.js`](src/data/site.js).
 
 ## Estrutura
 
@@ -97,4 +97,5 @@ netlify.toml            build, cabeçalhos de segurança e cache
 
 - E-mail: [garciakelvin604@gmail.com](mailto:garciakelvin604@gmail.com)
 - GitHub: [github.com/kelvinsg218](https://github.com/kelvinsg218)
+- LinkedIn: [linkedin.com/in/kelvin-simões-4890432b7](https://www.linkedin.com/in/kelvin-sim%C3%B5es-4890432b7/)
 - Serra – ES, Brasil

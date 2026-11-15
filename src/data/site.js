@@ -13,6 +13,6 @@ export const site = {
   github: 'https://github.com/kelvinsg218',
   githubUser: 'kelvinsg218',
   // Deixe vazio para ocultar o link do LinkedIn.
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/kelvin-sim%C3%B5es-4890432b7/',
   repo: 'https://github.com/kelvinsg218/kelvin-portfolio',
 };

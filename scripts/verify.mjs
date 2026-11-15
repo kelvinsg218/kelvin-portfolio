@@ -107,7 +107,9 @@ for (const vp of viewports) {
       } catch (e) {
         status = String(e.message).slice(0, 60);
       }
-      check(`link externo ${href}`, status === 200, String(status));
+      // O LinkedIn responde 999 a clientes automatizados; o link funciona normalmente no navegador.
+      const botBlocked = href.includes('linkedin.com') && status === 999;
+      check(`link externo ${href}`, status === 200 || botBlocked, botBlocked ? '999 (bloqueio anti-robô do LinkedIn)' : String(status));
     }
 
     await page.fill('[data-term-input]', 'projetos');

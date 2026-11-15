@@ -21,7 +21,7 @@ export function createCommands({ site, projects }) {
     stack: () =>
       'Suporte: Windows · Redes/DHCP · Acesso remoto · Hardware e periféricos\nCódigo:  Python · C#/.NET · WPF · SQLite · JavaScript/Node.js · Git\nEstudando: Go · AWS · Azure',
     contato: () =>
-      [`E-mail:   ${site.email}`, `GitHub:   ${site.github}`, site.linkedin ? `LinkedIn: ${site.linkedin}` : null]
+      [`E-mail:   ${site.email}`, `GitHub:   ${site.github}`, site.linkedin ? `LinkedIn: ${decodeURIComponent(site.linkedin)}` : null]
         .filter(Boolean)
         .join('\n'),
     github: () => ({ text: `Abrindo ${site.github} ...`, open: site.github }),
