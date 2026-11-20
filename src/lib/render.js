@@ -72,7 +72,7 @@ export function renderProjectCard(p, index = 0) {
         </div>`
       : '';
   const actions = [
-    p.demo ? `<a class="btn btn--primary" href="${esc(p.demo)}" target="_blank" rel="noopener">${icon.demo}Ver demonstração</a>` : '',
+    p.demo ? `<a class="btn btn--primary" href="${esc(p.demo)}" target="_blank" rel="noopener">${icon.demo}${esc(p.demoLabel || 'Ver demonstração')}</a>` : '',
     `<a class="btn ${p.demo ? 'btn--ghost' : 'btn--primary'}" href="${esc(url)}" target="_blank" rel="noopener">${icon.github}${p.demo ? 'GitHub' : 'Ver código'}</a>`,
     p.docs ? `<a class="btn btn--ghost" href="${esc(p.docs)}" target="_blank" rel="noopener">${icon.docs}Documentação</a>` : '',
     p.release || p.download ? `<a class="btn btn--ghost" href="${esc(releaseUrl)}" target="_blank" rel="noopener">${icon.download}Baixar release</a>` : '',

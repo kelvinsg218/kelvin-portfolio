@@ -277,7 +277,8 @@ a { color: inherit; }
 .project--featured .project__num,
 .project--featured .project__highlights li::before { color: var(--brand); }
 .project--featured .project__title { font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: 0.02em; display: flex; align-items: center; gap: 14px; }
-.project__logo { width: auto; height: 0.85em; flex: none; }
+.project__logo { width: auto; height: 0.85em; flex: none; display: inline-block; vertical-align: -0.08em; margin-right: 0.35em; }
+.project--featured .project__logo { margin-right: 0; }
 .project__badge {
   margin-left: auto; padding: 5px 10px; border-radius: 999px; font: 700 0.7rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
   color: #fff; background: var(--brand, var(--orange));

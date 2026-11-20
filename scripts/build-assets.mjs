@@ -24,7 +24,7 @@ const lqip = await sharp(src('hero-ilustracao.png')).resize({ width: 24 }).webp(
 await writeFile(out('img/hero-lqip.txt'), `data:image/webp;base64,${lqip.toString('base64')}`);
 
 // 2. Capturas dos projetos (vindas dos READMEs dos próprios repositórios).
-for (const id of ['flowrix', 'wma', 'phm', 'pat']) {
+for (const id of ['flowrix', 'wma', 'phm', 'pat', 'zentra']) {
   for (const w of [640, 1200]) {
     await sharp(src(`shot-${id}.png`))
       .resize({ width: w, withoutEnlargement: true })
@@ -46,6 +46,8 @@ for (const [name, file] of Object.entries(FLOWRIX_GALLERY)) {
   await sharp(input).resize({ width: 1440, withoutEnlargement: true }).webp({ quality: 82 }).toFile(out(`img/projects/${name}-1440.webp`));
 }
 await copyFile(src('flowrix/flowrix-symbol.svg'), out('img/projects/flowrix-symbol.svg'));
+// 2c. ZENTRA: símbolo da marca (a estrela), do repositório do próprio projeto.
+await copyFile(src('zentra/zentra-simbolo.svg'), out('img/projects/zentra-simbolo.svg'));
 
 // 3. Favicon: monograma "K" com cursor laranja.
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">

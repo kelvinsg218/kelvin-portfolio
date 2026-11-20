@@ -12,12 +12,13 @@ const memoryStorage = () => {
 };
 
 describe('configuração de projetos', () => {
-  it('contém exatamente os projetos autorizados, com o FLOWRIX primeiro', () => {
+  it('contém exatamente os projetos autorizados, com o FLOWRIX primeiro e o ZENTRA por último', () => {
     expect(projects.map((p) => p.repo)).toEqual([
       'kelvinsg218/flowdesk-automation',
       'kelvinsg218/Windows-Maintenance-Agent',
       'kelvinsg218/pc-health-monitor',
       'kelvinsg218/peripheral-asset-tracker',
+      'kelvinsg218/Solucao_Total',
     ]);
   });
 
@@ -71,6 +72,19 @@ describe('renderização', () => {
     expect(html).toContain('flowrix-symbol.svg');
     expect(html.match(/data-lightbox /g)).toHaveLength(4);
     expect(html).not.toContain('Baixar release'); // FLOWRIX não tem release publicada
+  });
+
+  it('gera o card do ZENTRA no padrão dos demais, com sistema publicado, GitHub e símbolo da marca', () => {
+    const z = projects.find((p) => p.id === 'zentra');
+    const html = renderProjectCard(z, projects.indexOf(z));
+    expect(html).not.toContain('project--featured');
+    expect(html).toContain('>05<');
+    expect(html).toContain('href="https://solucao-total.netlify.app"');
+    expect(html).toContain('Acessar sistema');
+    expect(html).toContain('href="https://github.com/kelvinsg218/Solucao_Total"');
+    expect(html).toContain('zentra-simbolo.svg');
+    expect(html).toContain('zentra-1200.webp');
+    expect(html).not.toContain('Baixar release');
   });
 
   it('validateProject recusa URLs não https e galeria sem alt', () => {
@@ -156,6 +170,8 @@ describe('terminal', () => {
   it('abre o repositório do projeto pelo número', () => {
     expect(runCommand(cmds, 'abrir 1').open).toBe('https://github.com/kelvinsg218/flowdesk-automation');
     expect(runCommand(cmds, 'abrir 4').open).toBe('https://github.com/kelvinsg218/peripheral-asset-tracker');
+    expect(runCommand(cmds, 'abrir 5').open).toBe('https://github.com/kelvinsg218/Solucao_Total');
+    expect(runCommand(cmds, 'projetos').text).toContain('5. ZENTRA');
     expect(runCommand(cmds, 'abrir 9').text).toMatch(/Uso/);
   });
 

@@ -20,6 +20,7 @@
  * - solution    (opcional) como o projeto resolve o problema
  * - docs        (opcional) URL da documentação
  * - demo        (opcional) URL de uma demonstração pública funcional
+ * - demoLabel   (opcional) texto do botão da demonstração (padrão: "Ver demonstração")
  * - brand       (opcional) { color: '#hex', logo: 'arquivo.svg' em public/img/projects/ }
  * - gallery     (opcional) [{ file: 'nome', alt: '...' }] — gera public/img/projects/<nome>-480.webp e -1440.webp
  */
@@ -114,5 +115,28 @@ export const projects = [
     image: 'pat',
     imageAlt: 'Painel do Peripheral Asset Tracker com totais e alertas de dispositivos',
     release: 'v1.0.0',
+  },
+  {
+    id: 'zentra',
+    name: 'ZENTRA',
+    repo: 'kelvinsg218/Solucao_Total',
+    category: 'Gestão de equipes e pessoas',
+    summary:
+      'Sistema web multiempresa para centralizar a gestão de equipes e pessoas: colaboradores, diaristas, escalas, presenças, pagamentos e processos administrativos em uma única plataforma.',
+    problem:
+      'Empresas que trabalham com diaristas e equipes temporárias controlavam escalas, presenças e pagamentos em planilhas, mensagens e anotações soltas — o que gerava erros de pagamento e retrabalho.',
+    highlights: [
+      'Gestão de equipes, colaboradores e diaristas, com importação por planilha CSV ou Excel',
+      'Escalas por dia, semana e mês e registro de presença pelo supervisor no celular',
+      'Aprovação de diárias, fechamentos e pagamentos, inclusive parciais, com comprovantes',
+      'Relatórios operacionais e financeiros em PDF, Excel e CSV',
+      'Controle de acesso por perfil e várias empresas com dados isolados',
+    ],
+    stack: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Supabase', 'Netlify', 'Render'],
+    image: 'zentra',
+    imageAlt: 'Dashboard do ZENTRA com a empresa de demonstração (dados fictícios): escalados, presenças, saldo a pagar e gráficos',
+    demo: 'https://solucao-total.netlify.app',
+    demoLabel: 'Acessar sistema',
+    brand: { color: '#8A5CF6', logo: 'zentra-simbolo.svg' },
   },
 ];

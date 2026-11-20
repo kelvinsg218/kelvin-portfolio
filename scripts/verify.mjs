@@ -128,7 +128,7 @@ for (const vp of viewports) {
 
   // Projetos: ordem, destaque do FLOWRIX e captura do card
   const order = await page.$$eval('.project .project__title', (els) => els.map((e) => e.textContent.trim()));
-  const expected = ['FLOWRIX', 'Windows Maintenance Agent', 'PC Health Monitor', 'Peripheral Asset Tracker'];
+  const expected = ['FLOWRIX', 'Windows Maintenance Agent', 'PC Health Monitor', 'Peripheral Asset Tracker', 'ZENTRA'];
   check(`[${vp.name}] ordem dos projetos`, JSON.stringify(order) === JSON.stringify(expected), order.join(' > '));
   const featured = await page.$eval('.project', (el) => ({ cls: el.classList.contains('project--featured'), brand: getComputedStyle(el).getPropertyValue('--brand').trim() }));
   check(`[${vp.name}] FLOWRIX em destaque com a cor da marca`, featured.cls && featured.brand.toLowerCase() === '#e52435', JSON.stringify(featured));

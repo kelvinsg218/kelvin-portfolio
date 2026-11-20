@@ -2,7 +2,7 @@
 
 > Da resolução de problemas à criação de soluções.
 
-Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, implantação de sistemas e desenvolvimento de software: o **FLOWRIX**, plataforma web de automação de processos e integração de sistemas, e ferramentas para Windows que nasceram de problemas reais do dia a dia do suporte.
+Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, implantação de sistemas e desenvolvimento de software: o **FLOWRIX**, plataforma web de automação de processos e integração de sistemas, o **ZENTRA**, sistema web de gestão de equipes e pessoas, e ferramentas para Windows que nasceram de problemas reais do dia a dia do suporte.
 
 ### Projetos em destaque
 
@@ -12,6 +12,7 @@ Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, 
 | 2 | [Windows Maintenance Agent](https://github.com/kelvinsg218/Windows-Maintenance-Agent) | Manutenção preventiva de Windows 10/11 |
 | 3 | [PC Health Monitor](https://github.com/kelvinsg218/pc-health-monitor) | Diagnóstico da saúde do computador |
 | 4 | [Peripheral Asset Tracker](https://github.com/kelvinsg218/peripheral-asset-tracker) | Inventário de periféricos com histórico de movimentações |
+| 5 | [ZENTRA](https://github.com/kelvinsg218/Solucao_Total) · [sistema publicado](https://solucao-total.netlify.app) | Gestão de equipes e pessoas, multiempresa: colaboradores, diaristas, escalas, presenças, pagamentos e relatórios |
 
 **🌐 Site publicado:** https://kelvin-garcia.netlify.app
 
@@ -82,7 +83,7 @@ Para o `verify` com `chromium`, instale uma vez o navegador headless: `npx playw
      image: 'meu-projeto',                    // opcional
      release: 'v1.0.0',                       // opcional
      // opcionais — veja o FLOWRIX como exemplo completo:
-     // solution, docs, demo (URLs https), featured: true,
+     // solution, docs, demo (URLs https), demoLabel, featured: true,
      // brand: { color: '#E52435', logo: 'arquivo.svg' }, gallery: [{ file, alt }]
    },
    ```
