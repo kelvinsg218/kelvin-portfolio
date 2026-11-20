@@ -142,7 +142,15 @@ for (const vp of viewports) {
 
   if (vp.name === 'desktop') {
     await page.click('#projeto-flowrix [data-lightbox] >> nth=1');
-    await page.waitForTimeout(600);
+    // espera o carregamento sem waitForFunction (que usa eval e é bloqueado pela CSP do site)
+    for (let t = 0; t < 40; t++) {
+      const ready = await page.evaluate(() => {
+        const img = document.querySelector('[data-lightbox-img]');
+        return Boolean(img && img.complete && img.naturalWidth > 0);
+      });
+      if (ready) break;
+      await page.waitForTimeout(250);
+    }
     const lb = await page.evaluate(() => {
       const d = document.querySelector('[data-lightbox-dialog]');
       const img = d.querySelector('img');
