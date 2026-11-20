@@ -2,7 +2,16 @@
 
 > Da resolução de problemas à criação de soluções.
 
-Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, implantação de sistemas e desenvolvimento de software: ferramentas para Windows que nasceram de problemas reais do dia a dia do suporte.
+Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, implantação de sistemas e desenvolvimento de software: o **FLOWRIX**, plataforma web de automação de processos e integração de sistemas, e ferramentas para Windows que nasceram de problemas reais do dia a dia do suporte.
+
+### Projetos em destaque
+
+| # | Projeto | O que é |
+|---|---|---|
+| 1 | [FLOWRIX](https://github.com/kelvinsg218/flowdesk-automation) · [demonstração](https://flowdesk-automation.netlify.app) | Automação visual de processos: editor de fluxos, motor de execução em Python, webhooks, versionamento e histórico |
+| 2 | [Windows Maintenance Agent](https://github.com/kelvinsg218/Windows-Maintenance-Agent) | Manutenção preventiva de Windows 10/11 |
+| 3 | [PC Health Monitor](https://github.com/kelvinsg218/pc-health-monitor) | Diagnóstico da saúde do computador |
+| 4 | [Peripheral Asset Tracker](https://github.com/kelvinsg218/peripheral-asset-tracker) | Inventário de periféricos com histórico de movimentações |
 
 **🌐 Site publicado:** https://kelvin-garcia.netlify.app
 
@@ -13,7 +22,8 @@ Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, 
 - **Hero ilustrado** com a arte personalizada, adaptada para desktop, tablet e celular sem distorção e com o rosto sempre enquadrado.
 - **Animações de entrada** e elementos SVG complementares (faíscas, circuitos, código) com parallax sutil — respeitando `prefers-reduced-motion`.
 - **Trajetória** profissional e acadêmica em linha do tempo.
-- **Projetos** gerados a partir de um único arquivo de configuração, com capturas de tela, tecnologias e links de código e release.
+- **Projetos** gerados a partir de um único arquivo de configuração, com capturas de tela, tecnologias e links de código, release, documentação e demonstração.
+- **Projeto em destaque** (FLOWRIX) com a identidade visual do próprio projeto (cor e símbolo), problema e solução, e **galeria** de capturas reais com visualização ampliada.
 - **Dados ao vivo do GitHub** (última release, data de atualização, estrelas) via API pública, sem token, com cache de 6 h. Se a API estiver indisponível ou limitada, o site continua mostrando as informações da configuração.
 - **Terminal interativo** (`help`, `sobre`, `projetos`, `abrir 1`, `stack`, `contato`…).
 - **Contato** por e-mail (com botão de copiar) e GitHub.
@@ -44,13 +54,16 @@ Outros comandos:
 
 | Comando | O que faz |
 |---|---|
+| `npm run typecheck` | verificação de tipos do JavaScript (TypeScript em modo `checkJs`) |
 | `npm test` | roda os testes unitários |
+| `npm run check` | typecheck + testes + build |
 | `npm run build` | gera o build de produção em `dist/` |
 | `npm run preview` | serve o build em http://localhost:4173 |
 | `npm run assets` | regenera imagens otimizadas a partir de `assets-src/` |
-| `npm run verify -- <url>` | verificação de ponta a ponta (imagens, links, console, responsividade) |
+| `npm run verify -- <url> [pasta] [navegador]` | verificação de ponta a ponta (imagens, links, console, responsividade, galeria); navegador: `chromium`, `chrome` ou `msedge` |
+| `npm run promo` | regenera as imagens de divulgação em `publicacao/imagens/` |
 
-Para o `verify`, instale uma vez o navegador headless: `npx playwright-core install chromium-headless-shell`.
+Para o `verify` com `chromium`, instale uma vez o navegador headless: `npx playwright-core install chromium-headless-shell`. Com `chrome` ou `msedge`, ele usa o navegador instalado no sistema.
 
 ## Adicionar um projeto
 
@@ -68,14 +81,19 @@ Para o `verify`, instale uma vez o navegador headless: `npx playwright-core inst
      stack: ['Node.js', 'Express'],
      image: 'meu-projeto',                    // opcional
      release: 'v1.0.0',                       // opcional
+     // opcionais — veja o FLOWRIX como exemplo completo:
+     // solution, docs, demo (URLs https), featured: true,
+     // brand: { color: '#E52435', logo: 'arquivo.svg' }, gallery: [{ file, alt }]
    },
    ```
 
-2. (Opcional) Coloque a captura de tela em `assets-src/shot-meu-projeto.png`, adicione `'meu-projeto'` à lista de capturas em [`scripts/build-assets.mjs`](scripts/build-assets.mjs) e rode `npm run assets`.
-3. Rode `npm test && npm run build`. O build falha com uma mensagem clara se algum campo obrigatório estiver faltando.
+   A posição no array define a ordem no site.
+
+2. (Opcional) Coloque a captura de tela em `assets-src/shot-meu-projeto.png`, adicione `'meu-projeto'` à lista de capturas em [`scripts/build-assets.mjs`](scripts/build-assets.mjs) e rode `npm run assets`. Imagens de galeria seguem o mesmo caminho (veja `FLOWRIX_GALLERY` no script).
+3. Rode `npm run check` (typecheck, testes e build). O build falha com uma mensagem clara se algum campo obrigatório estiver faltando ou uma URL não for https.
 4. Faça commit e push — o Netlify publica automaticamente.
 
-> O teste `contém exatamente os três projetos autorizados` existe para evitar inclusões acidentais; atualize-o junto ao adicionar um projeto.
+> O teste `contém exatamente os projetos autorizados` existe para evitar inclusões acidentais; atualize-o junto ao adicionar um projeto.
 
 Contatos e links ficam em [`src/data/site.js`](src/data/site.js).
 

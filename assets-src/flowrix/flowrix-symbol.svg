@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 280" fill="none" role="img" aria-label="Flowrix">
+  <defs>
+    <linearGradient id="fxr" x1="360" y1="0" x2="0" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF2B2B"/>
+      <stop offset=".5" stop-color="#E8141F"/>
+      <stop offset="1" stop-color="#C00C17"/>
+    </linearGradient>
+    <linearGradient id="fxs" x1="40" y1="200" x2="150" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7A0610" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#7A0610" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M176 2H358L306 64H162C125 66 94 74 64 92C84 52 112 22 146 8C155 4 165 2 176 2Z" fill="url(#fxr)"/>
+  <path d="M178 100H292L246 156C242 160 238 162 232 162H162L98 240C90 252 78 260 62 266L4 280L82 150C98 118 132 100 178 100Z" fill="url(#fxr)"/>
+  <path d="M82 150C98 118 132 100 178 100C150 108 128 126 118 154L60 266L4 280Z" fill="url(#fxs)"/>
+</svg>

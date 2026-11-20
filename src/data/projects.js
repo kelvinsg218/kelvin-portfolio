@@ -16,8 +16,45 @@
  * - imageAlt    (opcional) texto alternativo da imagem
  * - release     (opcional) versão publicada, usada se a API do GitHub estiver indisponível
  * - download    (opcional) URL direta de download
+ * - featured    (opcional) true = card em destaque, largura total
+ * - solution    (opcional) como o projeto resolve o problema
+ * - docs        (opcional) URL da documentação
+ * - demo        (opcional) URL de uma demonstração pública funcional
+ * - brand       (opcional) { color: '#hex', logo: 'arquivo.svg' em public/img/projects/ }
+ * - gallery     (opcional) [{ file: 'nome', alt: '...' }] — gera public/img/projects/<nome>-480.webp e -1440.webp
  */
 export const projects = [
+  {
+    id: 'flowrix',
+    name: 'FLOWRIX',
+    repo: 'kelvinsg218/flowdesk-automation',
+    category: 'Automação de processos · Integração de sistemas',
+    featured: true,
+    summary:
+      'Plataforma de automação visual desenvolvida para simplificar processos, conectar sistemas e automatizar tarefas repetitivas. Permite construir fluxos de trabalho por meio de uma interface intuitiva, utilizando componentes configuráveis e conexões visuais.',
+    problem:
+      'Tarefas repetitivas feitas à mão, sistemas que não conversam entre si, regras de negócio que ficam só na cabeça das pessoas e nenhuma visibilidade sobre o que foi executado — ou onde deu erro.',
+    solution:
+      'O processo é desenhado como um fluxograma num editor visual e executado no servidor por um motor próprio em Python, que valida o fluxo, registra cada etapa com entrada, saída, duração e erros, e mascara senhas e tokens antes de gravar.',
+    highlights: [
+      'Editor visual: arrastar e soltar, conectar, configurar no inspetor e testar com progresso nó a nó',
+      'Componentes: Gatilho manual, Webhook, Definir dados, SE / SENÃO (14 operadores), Requisição HTTP e Fim',
+      'Versionamento imutável: webhooks executam sempre a versão publicada',
+      'Histórico com detalhe por etapa e dashboard com taxa de sucesso e gráfico de 14 dias',
+    ],
+    stack: ['React', 'TypeScript', 'React Flow', 'Tailwind CSS', 'Python', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
+    image: 'flowrix',
+    imageAlt: 'Editor do FLOWRIX com o fluxo "Qualificação de leads" executado com sucesso, etapa por etapa',
+    docs: 'https://github.com/kelvinsg218/flowdesk-automation/blob/master/docs/GUIA-DO-USUARIO.md',
+    demo: 'https://flowdesk-automation.netlify.app',
+    brand: { color: '#E52435', logo: 'flowrix-symbol.svg' },
+    gallery: [
+      { file: 'flowrix-landing', alt: 'Página inicial do FLOWRIX: “Fluxos complexos. Elegantemente simples.”' },
+      { file: 'flowrix-dashboard', alt: 'Dashboard do FLOWRIX com workflows, execuções, taxa de sucesso e gráfico de 14 dias' },
+      { file: 'flowrix-execucao', alt: 'Detalhe de uma execução com entrada, saída e duração de cada etapa' },
+      { file: 'flowrix-falha', alt: 'Execução com falha registrada: requisição a endereço interno bloqueada (proteção contra SSRF)' },
+    ],
+  },
   {
     id: 'windows-maintenance-agent',
     name: 'Windows Maintenance Agent',

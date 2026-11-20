@@ -4,7 +4,9 @@ import { site } from './data/site.js';
 import { fetchRepoInfo, formatLive } from './lib/github.js';
 import { createCommands, runCommand } from './lib/terminal.js';
 
+/** @type {(sel: string, root?: ParentNode) => any} */
 const $ = (sel, root = document) => root.querySelector(sel);
+/** @type {(sel: string, root?: ParentNode) => any[]} */
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -96,6 +98,25 @@ $$('[data-copy]').forEach((btn) =>
     setTimeout(() => (btn.textContent = original), 2200);
   }),
 );
+
+// Galeria: abre a imagem ampliada num <dialog>; sem JS, o link abre a imagem direto.
+const lightbox = /** @type {HTMLDialogElement | null} */ ($('[data-lightbox-dialog]'));
+if (lightbox && typeof lightbox.showModal === 'function') {
+  const lbImg = /** @type {HTMLImageElement} */ ($('[data-lightbox-img]', lightbox));
+  const lbCap = $('[data-lightbox-caption]', lightbox);
+  $$('[data-lightbox]').forEach((link) =>
+    link.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const caption = /** @type {HTMLElement} */ (link).dataset.caption || '';
+      lbImg.src = link.getAttribute('href') || '';
+      lbImg.alt = caption;
+      if (lbCap) lbCap.textContent = caption;
+      lightbox.showModal();
+    }),
+  );
+  $('[data-lightbox-close]', lightbox)?.addEventListener('click', () => lightbox.close());
+  lightbox.addEventListener('click', (ev) => ev.target === lightbox && lightbox.close());
+}
 
 // Terminal interativo
 const term = $('[data-terminal]');

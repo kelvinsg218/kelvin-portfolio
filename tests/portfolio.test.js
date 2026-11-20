@@ -12,8 +12,9 @@ const memoryStorage = () => {
 };
 
 describe('configuração de projetos', () => {
-  it('contém exatamente os três projetos autorizados', () => {
+  it('contém exatamente os projetos autorizados, com o FLOWRIX primeiro', () => {
     expect(projects.map((p) => p.repo)).toEqual([
+      'kelvinsg218/flowdesk-automation',
       'kelvinsg218/Windows-Maintenance-Agent',
       'kelvinsg218/pc-health-monitor',
       'kelvinsg218/peripheral-asset-tracker',
@@ -30,6 +31,22 @@ describe('configuração de projetos', () => {
       expect(existsSync(`public/img/projects/${p.image}-640.webp`)).toBe(true);
       expect(existsSync(`public/img/projects/${p.image}-1200.webp`)).toBe(true);
     }
+    for (const p of projects) {
+      for (const g of p.gallery || []) {
+        expect(existsSync(`public/img/projects/${g.file}-480.webp`), g.file).toBe(true);
+        expect(existsSync(`public/img/projects/${g.file}-1440.webp`), g.file).toBe(true);
+      }
+      if (p.brand?.logo) expect(existsSync(`public/img/projects/${p.brand.logo}`)).toBe(true);
+    }
+  });
+
+  it('apenas o FLOWRIX está em destaque', () => {
+    expect(projects.filter((p) => p.featured).map((p) => p.id)).toEqual(['flowrix']);
+  });
+
+  it('não inclui projetos não autorizados (BLI, MLA, Traço 3D)', () => {
+    const repos = projects.map((p) => p.repo.toLowerCase()).join(' ');
+    expect(repos).not.toMatch(/business-location|marketplace-listing|tra-o_3d|3d_project/);
   });
 
   it('validateProject aponta campos ausentes e formatos inválidos', () => {
@@ -43,12 +60,32 @@ describe('renderização', () => {
     expect(esc('<a href="x">&\'')).toBe('&lt;a href=&quot;x&quot;&gt;&amp;&#39;');
   });
 
-  it('gera card com links do repositório e da release', () => {
+  it('gera o card em destaque do FLOWRIX com demo, GitHub, documentação, solução, marca e galeria', () => {
     const html = renderProjectCard(projects[0], 0);
+    expect(html).toContain('project--featured');
+    expect(html).toContain('--brand:#E52435');
+    expect(html).toContain('href="https://flowdesk-automation.netlify.app"');
+    expect(html).toContain('href="https://github.com/kelvinsg218/flowdesk-automation"');
+    expect(html).toContain('docs/GUIA-DO-USUARIO.md');
+    expect(html).toContain('Solução:');
+    expect(html).toContain('flowrix-symbol.svg');
+    expect(html.match(/data-lightbox /g)).toHaveLength(4);
+    expect(html).not.toContain('Baixar release'); // FLOWRIX não tem release publicada
+  });
+
+  it('validateProject recusa URLs não https e galeria sem alt', () => {
+    const base = { id: 'x', name: 'X', repo: 'u/x', summary: 's' };
+    expect(validateProject({ ...base, demo: 'http://inseguro' })).toHaveLength(1);
+    expect(validateProject({ ...base, gallery: [{ file: 'a' }] })).toHaveLength(1);
+    expect(validateProject({ ...base, brand: { color: 'red' } })).toHaveLength(1);
+  });
+
+  it('gera card com links do repositório e da release', () => {
+    const html = renderProjectCard(projects[1], 1);
     expect(html).toContain('href="https://github.com/kelvinsg218/Windows-Maintenance-Agent"');
     expect(html).toContain('/releases/latest');
     expect(html).toContain('loading="lazy"');
-    expect(html).toContain('>01<');
+    expect(html).toContain('>02<');
   });
 
   it('funciona com um projeto mínimo (sem imagem, release ou listas)', () => {
@@ -117,7 +154,8 @@ describe('terminal', () => {
   });
 
   it('abre o repositório do projeto pelo número', () => {
-    expect(runCommand(cmds, 'abrir 3').open).toBe('https://github.com/kelvinsg218/peripheral-asset-tracker');
+    expect(runCommand(cmds, 'abrir 1').open).toBe('https://github.com/kelvinsg218/flowdesk-automation');
+    expect(runCommand(cmds, 'abrir 4').open).toBe('https://github.com/kelvinsg218/peripheral-asset-tracker');
     expect(runCommand(cmds, 'abrir 9').text).toMatch(/Uso/);
   });
 

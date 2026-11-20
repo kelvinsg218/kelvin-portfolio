@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { readFileSync } from 'node:fs';
 import { projects } from './src/data/projects.js';
 import { site } from './src/data/site.js';
@@ -6,6 +6,7 @@ import { renderProjects, validateProject, esc } from './src/lib/render.js';
 
 // Injeta projetos e dados do site no HTML durante o build (HTML estático: bom para SEO
 // e funciona sem JavaScript). Falha o build se src/data/projects.js estiver inválido.
+/** @returns {import('vite').Plugin} */
 function portfolioHtml() {
   return {
     name: 'portfolio-html',
@@ -58,6 +59,7 @@ function portfolioHtml() {
 }
 
 // Placeholder borrado da ilustração, injetado depois do processamento do Vite.
+/** @returns {import('vite').Plugin} */
 function heroLqip() {
   return {
     name: 'hero-lqip',

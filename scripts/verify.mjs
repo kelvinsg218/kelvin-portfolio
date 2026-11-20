@@ -1,15 +1,23 @@
-// Verificação de ponta a ponta com Chromium (playwright-core; instale com: npx playwright-core install chromium-headless-shell).
-// Uso: node scripts/verify.mjs [url] [pasta-de-capturas]
-// Checa: erros de console, imagens quebradas, links internos, metadados, rolagem
-// horizontal em mobile, terminal e capturas de tela em desktop e mobile.
+// Verificação de ponta a ponta (playwright-core).
+// Uso: node scripts/verify.mjs [url] [pasta-de-capturas] [chromium|chrome|msedge]
+//   chromium: npx playwright-core install chromium-headless-shell
+//   chrome / msedge: usam o Google Chrome / Microsoft Edge instalados no sistema
+// Checa: erros de console, imagens quebradas, links internos e externos, metadados,
+// rolagem horizontal, ordem e destaque dos projetos, galeria, terminal e capturas.
 import { chromium } from 'playwright-core';
 import { mkdir } from 'node:fs/promises';
 
 const url = process.argv[2] || 'http://localhost:4173/';
 const outDir = process.argv[3] || 'verify-shots';
+const engine = process.argv[4] || 'chromium';
 await mkdir(outDir, { recursive: true });
 
-const browser = await chromium.launch({ headless: true });
+// Chrome/Edge atuais só aceitam o headless "novo"; o modo antigo fecha o navegador ao iniciar.
+const browser =
+  engine === 'chromium'
+    ? await chromium.launch({ headless: true })
+    : await chromium.launch({ channel: engine, headless: false, args: ['--headless=new'] });
+console.log(`Navegador: ${engine} ${browser.version()}`);
 const results = [];
 const check = (name, ok, detail = '') => {
   results.push({ name, ok, detail });
@@ -60,7 +68,7 @@ for (const vp of viewports) {
   await page.waitForTimeout(1200);
 
   const broken = await page.$$eval('img', (imgs) =>
-    imgs.filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.currentSrc || i.src),
+    imgs.filter((i) => i.getAttribute('src') && i.complete && i.naturalWidth === 0).map((i) => i.currentSrc || i.src),
   );
   check(`[${vp.name}] imagens carregadas`, broken.length === 0, broken.join(', '));
   check(`[${vp.name}] sem respostas 4xx/5xx`, failed.length === 0, failed.join(', '));
@@ -116,6 +124,35 @@ for (const vp of viewports) {
     await page.press('[data-term-input]', 'Enter');
     const termText = await page.textContent('[data-term-out]');
     check('terminal responde ao comando "projetos"', termText.includes('Peripheral Asset Tracker'));
+  }
+
+  // Projetos: ordem, destaque do FLOWRIX e captura do card
+  const order = await page.$$eval('.project .project__title', (els) => els.map((e) => e.textContent.trim()));
+  const expected = ['FLOWRIX', 'Windows Maintenance Agent', 'PC Health Monitor', 'Peripheral Asset Tracker'];
+  check(`[${vp.name}] ordem dos projetos`, JSON.stringify(order) === JSON.stringify(expected), order.join(' > '));
+  const featured = await page.$eval('.project', (el) => ({ cls: el.classList.contains('project--featured'), brand: getComputedStyle(el).getPropertyValue('--brand').trim() }));
+  check(`[${vp.name}] FLOWRIX em destaque com a cor da marca`, featured.cls && featured.brand.toLowerCase() === '#e52435', JSON.stringify(featured));
+  // rola deixando espaço para o menu fixo e esconde o menu só durante a captura do card
+  await page.$eval('#projeto-flowrix', (el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 100));
+  await page.waitForTimeout(900);
+  await page.addStyleTag({ content: '[data-nav]{visibility:hidden}' }).then(async (tag) => {
+    await page.locator('#projeto-flowrix').screenshot({ path: `${outDir}/${vp.name}-flowrix.png` });
+    await tag.evaluate((t) => t.remove());
+  });
+
+  if (vp.name === 'desktop') {
+    await page.click('#projeto-flowrix [data-lightbox] >> nth=1');
+    await page.waitForTimeout(600);
+    const lb = await page.evaluate(() => {
+      const d = document.querySelector('[data-lightbox-dialog]');
+      const img = d.querySelector('img');
+      return { open: d.open, loaded: img.complete && img.naturalWidth > 0, src: img.getAttribute('src') };
+    });
+    check('galeria do FLOWRIX abre a imagem ampliada', lb.open && lb.loaded, JSON.stringify(lb));
+    await page.screenshot({ path: `${outDir}/${vp.name}-flowrix-lightbox.png` });
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(300);
+    check('lightbox fecha com Esc', !(await page.evaluate(() => document.querySelector('[data-lightbox-dialog]').open)));
   }
 
   if (vp.name === 'mobile') {

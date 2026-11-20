@@ -1,7 +1,7 @@
 // Gera as imagens otimizadas do site a partir de assets-src/.
 // Uso: npm run assets  (só precisa rodar quando uma imagem de origem mudar)
 import sharp from 'sharp';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, copyFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -24,7 +24,7 @@ const lqip = await sharp(src('hero-ilustracao.png')).resize({ width: 24 }).webp(
 await writeFile(out('img/hero-lqip.txt'), `data:image/webp;base64,${lqip.toString('base64')}`);
 
 // 2. Capturas dos projetos (vindas dos READMEs dos próprios repositórios).
-for (const id of ['wma', 'phm', 'pat']) {
+for (const id of ['flowrix', 'wma', 'phm', 'pat']) {
   for (const w of [640, 1200]) {
     await sharp(src(`shot-${id}.png`))
       .resize({ width: w, withoutEnlargement: true })
@@ -32,6 +32,20 @@ for (const id of ['wma', 'phm', 'pat']) {
       .toFile(out(`img/projects/${id}-${w}.webp`));
   }
 }
+
+// 2b. FLOWRIX: galeria (miniatura + ampliada) e símbolo da marca, a partir das capturas reais do repositório.
+const FLOWRIX_GALLERY = {
+  'flowrix-landing': 'landing-desktop.png',
+  'flowrix-dashboard': 'dashboard-desktop.png',
+  'flowrix-execucao': 'execution-detail-desktop.png',
+  'flowrix-falha': 'editor-failed-desktop.png',
+};
+for (const [name, file] of Object.entries(FLOWRIX_GALLERY)) {
+  const input = src(`flowrix/${file}`);
+  await sharp(input).resize({ width: 480 }).webp({ quality: 74 }).toFile(out(`img/projects/${name}-480.webp`));
+  await sharp(input).resize({ width: 1440, withoutEnlargement: true }).webp({ quality: 82 }).toFile(out(`img/projects/${name}-1440.webp`));
+}
+await copyFile(src('flowrix/flowrix-symbol.svg'), out('img/projects/flowrix-symbol.svg'));
 
 // 3. Favicon: monograma "K" com cursor laranja.
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
