@@ -8,7 +8,7 @@ export function createCommands({ site, projects }) {
         'Comandos disponíveis:',
         '  sobre      quem é Kelvin',
         '  projetos   lista os projetos',
-        '  abrir <n>  abre o projeto n no GitHub',
+        '  abrir <n>  abre o projeto n (GitHub ou sistema publicado)',
         '  stack      tecnologias que uso',
         '  contato    como falar comigo',
         '  github     abre meu perfil no GitHub',
@@ -29,6 +29,10 @@ export function createCommands({ site, projects }) {
       const n = Number.parseInt(arg, 10);
       const p = projects[n - 1];
       if (!p) return `Uso: abrir <1-${projects.length}>`;
+      if (p.private) {
+        if (!p.demo) return `${p.name}: código privado.`;
+        return { text: `${p.name}: código privado — abrindo o sistema publicado ...`, open: p.demo };
+      }
       return { text: `Abrindo ${p.name} ...`, open: `https://github.com/${p.repo}` };
     },
     sudo: () => 'Permissão negada. Mas boa tentativa. 😄',

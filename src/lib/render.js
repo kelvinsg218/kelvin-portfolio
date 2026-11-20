@@ -71,14 +71,15 @@ export function renderProjectCard(p, index = 0) {
           ${p.solution ? `<p class="project__solution"><strong>Solução:</strong> ${esc(p.solution)}</p>` : ''}
         </div>`
       : '';
+  const priv = Boolean(p.private);
   const actions = [
     p.demo ? `<a class="btn btn--primary" href="${esc(p.demo)}" target="_blank" rel="noopener">${icon.demo}${esc(p.demoLabel || 'Ver demonstração')}</a>` : '',
-    `<a class="btn ${p.demo ? 'btn--ghost' : 'btn--primary'}" href="${esc(url)}" target="_blank" rel="noopener">${icon.github}${p.demo ? 'GitHub' : 'Ver código'}</a>`,
-    p.docs ? `<a class="btn btn--ghost" href="${esc(p.docs)}" target="_blank" rel="noopener">${icon.docs}Documentação</a>` : '',
-    p.release || p.download ? `<a class="btn btn--ghost" href="${esc(releaseUrl)}" target="_blank" rel="noopener">${icon.download}Baixar release</a>` : '',
+    priv ? '' : `<a class="btn ${p.demo ? 'btn--ghost' : 'btn--primary'}" href="${esc(url)}" target="_blank" rel="noopener">${icon.github}${p.demo ? 'GitHub' : 'Ver código'}</a>`,
+    p.docs && !priv ? `<a class="btn btn--ghost" href="${esc(p.docs)}" target="_blank" rel="noopener">${icon.docs}Documentação</a>` : '',
+    !priv && (p.release || p.download) ? `<a class="btn btn--ghost" href="${esc(releaseUrl)}" target="_blank" rel="noopener">${icon.download}Baixar release</a>` : '',
   ].join('');
   const brandStyle = p.brand?.color ? ` style="--brand:${esc(p.brand.color)}"` : '';
-  return `<article class="project reveal${featured ? ' project--featured' : ''}" id="projeto-${esc(p.id)}" data-repo="${esc(p.repo)}"${brandStyle}>
+  return `<article class="project reveal${featured ? ' project--featured' : ''}" id="projeto-${esc(p.id)}"${priv ? '' : ` data-repo="${esc(p.repo)}"`}${brandStyle}>
     <div class="project__body">
       <p class="project__meta"><span class="project__num">${num}</span>${esc(p.category || '')}${featured ? '<span class="project__badge">Novo</span>' : ''}</p>
       <h3 class="project__title">${logo}${esc(p.name)}</h3>
@@ -86,7 +87,9 @@ export function renderProjectCard(p, index = 0) {
       ${story}
       ${highlights ? `<ul class="project__highlights">${highlights}</ul>` : ''}
       ${stack ? `<ul class="project__stack" aria-label="Tecnologias">${stack}</ul>` : ''}
-      <p class="project__live" data-live aria-live="polite">${p.release ? `Release ${esc(p.release)}` : ''}</p>
+      ${priv
+        ? '<p class="project__live project__private">Código privado</p>'
+        : `<p class="project__live" data-live aria-live="polite">${p.release ? `Release ${esc(p.release)}` : ''}</p>`}
       <div class="project__actions">${actions}</div>
     </div>
     ${img}

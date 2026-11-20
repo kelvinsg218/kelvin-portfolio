@@ -41,6 +41,13 @@ describe('configuração de projetos', () => {
     }
   });
 
+  it('apenas FLOWRIX e ZENTRA têm código privado; os aplicativos Windows mantêm o GitHub', () => {
+    expect(projects.filter((p) => p.private).map((p) => p.id)).toEqual(['flowrix', 'zentra']);
+    for (const p of projects.filter((x) => !x.private)) {
+      expect(renderProjectCard(p, 0)).toContain(`href="https://github.com/${p.repo}"`);
+    }
+  });
+
   it('apenas o FLOWRIX está em destaque', () => {
     expect(projects.filter((p) => p.featured).map((p) => p.id)).toEqual(['flowrix']);
   });
@@ -61,27 +68,31 @@ describe('renderização', () => {
     expect(esc('<a href="x">&\'')).toBe('&lt;a href=&quot;x&quot;&gt;&amp;&#39;');
   });
 
-  it('gera o card em destaque do FLOWRIX com demo, GitHub, documentação, solução, marca e galeria', () => {
+  it('gera o card em destaque do FLOWRIX com demo, solução, marca e galeria — sem links para o código privado', () => {
     const html = renderProjectCard(projects[0], 0);
     expect(html).toContain('project--featured');
     expect(html).toContain('--brand:#E52435');
     expect(html).toContain('href="https://flowdesk-automation.netlify.app"');
-    expect(html).toContain('href="https://github.com/kelvinsg218/flowdesk-automation"');
-    expect(html).toContain('docs/GUIA-DO-USUARIO.md');
+    expect(html).not.toContain('github.com/kelvinsg218/flowdesk-automation');
+    expect(html).not.toContain('Documentação');
+    expect(html).not.toContain('data-repo');
+    expect(html).toContain('Código privado');
     expect(html).toContain('Solução:');
     expect(html).toContain('flowrix-symbol.svg');
     expect(html.match(/data-lightbox /g)).toHaveLength(4);
     expect(html).not.toContain('Baixar release'); // FLOWRIX não tem release publicada
   });
 
-  it('gera o card do ZENTRA no padrão dos demais, com sistema publicado, GitHub e símbolo da marca', () => {
+  it('gera o card do ZENTRA no padrão dos demais, com sistema publicado, símbolo da marca e código privado', () => {
     const z = projects.find((p) => p.id === 'zentra');
     const html = renderProjectCard(z, projects.indexOf(z));
     expect(html).not.toContain('project--featured');
     expect(html).toContain('>05<');
     expect(html).toContain('href="https://solucao-total.netlify.app"');
     expect(html).toContain('Acessar sistema');
-    expect(html).toContain('href="https://github.com/kelvinsg218/Solucao_Total"');
+    expect(html).not.toContain('github.com/kelvinsg218/Solucao_Total');
+    expect(html).not.toContain('data-repo');
+    expect(html).toContain('Código privado');
     expect(html).toContain('zentra-simbolo.svg');
     expect(html).toContain('zentra-1200.webp');
     expect(html).not.toContain('Baixar release');
@@ -168,9 +179,11 @@ describe('terminal', () => {
   });
 
   it('abre o repositório do projeto pelo número', () => {
-    expect(runCommand(cmds, 'abrir 1').open).toBe('https://github.com/kelvinsg218/flowdesk-automation');
+    expect(runCommand(cmds, 'abrir 1').open).toBe('https://flowdesk-automation.netlify.app');
+    expect(runCommand(cmds, 'abrir 1').text).toContain('código privado');
+    expect(runCommand(cmds, 'abrir 2').open).toBe('https://github.com/kelvinsg218/Windows-Maintenance-Agent');
     expect(runCommand(cmds, 'abrir 4').open).toBe('https://github.com/kelvinsg218/peripheral-asset-tracker');
-    expect(runCommand(cmds, 'abrir 5').open).toBe('https://github.com/kelvinsg218/Solucao_Total');
+    expect(runCommand(cmds, 'abrir 5').open).toBe('https://solucao-total.netlify.app');
     expect(runCommand(cmds, 'projetos').text).toContain('5. ZENTRA');
     expect(runCommand(cmds, 'abrir 9').text).toMatch(/Uso/);
   });

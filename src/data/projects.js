@@ -7,6 +7,8 @@
  * - id          identificador curto e único (usado em âncoras e nomes de imagem)
  * - name        nome exibido
  * - repo        "usuario/repositorio" no GitHub — usado para links e dados ao vivo
+ * - private     (opcional) true = código privado: sem links para o repositório/documentação,
+ *               sem consulta à API do GitHub; mostra "Código privado" e o terminal abre a demo
  * - category    rótulo curto acima do título
  * - summary     uma frase que resume o projeto
  * - problem     o problema real que motivou o projeto
@@ -29,6 +31,7 @@ export const projects = [
     id: 'flowrix',
     name: 'FLOWRIX',
     repo: 'kelvinsg218/flowdesk-automation',
+    private: true,
     category: 'Automação de processos · Integração de sistemas',
     featured: true,
     summary:
@@ -46,7 +49,6 @@ export const projects = [
     stack: ['React', 'TypeScript', 'React Flow', 'Tailwind CSS', 'Python', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
     image: 'flowrix',
     imageAlt: 'Editor do FLOWRIX com o fluxo "Qualificação de leads" executado com sucesso, etapa por etapa',
-    docs: 'https://github.com/kelvinsg218/flowdesk-automation/blob/master/docs/GUIA-DO-USUARIO.md',
     demo: 'https://flowdesk-automation.netlify.app',
     brand: { color: '#E52435', logo: 'flowrix-symbol.svg' },
     gallery: [
@@ -120,6 +122,7 @@ export const projects = [
     id: 'zentra',
     name: 'ZENTRA',
     repo: 'kelvinsg218/Solucao_Total',
+    private: true,
     category: 'Gestão de equipes e pessoas',
     summary:
       'Sistema web multiempresa para centralizar a gestão de equipes e pessoas: colaboradores, diaristas, escalas, presenças, pagamentos e processos administrativos em uma única plataforma.',

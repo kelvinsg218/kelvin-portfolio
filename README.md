@@ -8,11 +8,11 @@ Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, 
 
 | # | Projeto | O que é |
 |---|---|---|
-| 1 | [FLOWRIX](https://github.com/kelvinsg218/flowdesk-automation) · [demonstração](https://flowdesk-automation.netlify.app) | Automação visual de processos: editor de fluxos, motor de execução em Python, webhooks, versionamento e histórico |
+| 1 | FLOWRIX · [demonstração](https://flowdesk-automation.netlify.app) · código privado | Automação visual de processos: editor de fluxos, motor de execução em Python, webhooks, versionamento e histórico |
 | 2 | [Windows Maintenance Agent](https://github.com/kelvinsg218/Windows-Maintenance-Agent) | Manutenção preventiva de Windows 10/11 |
 | 3 | [PC Health Monitor](https://github.com/kelvinsg218/pc-health-monitor) | Diagnóstico da saúde do computador |
 | 4 | [Peripheral Asset Tracker](https://github.com/kelvinsg218/peripheral-asset-tracker) | Inventário de periféricos com histórico de movimentações |
-| 5 | [ZENTRA](https://github.com/kelvinsg218/Solucao_Total) · [sistema publicado](https://solucao-total.netlify.app) | Gestão de equipes e pessoas, multiempresa: colaboradores, diaristas, escalas, presenças, pagamentos e relatórios |
+| 5 | ZENTRA · [sistema publicado](https://solucao-total.netlify.app) · código privado | Gestão de equipes e pessoas, multiempresa: colaboradores, diaristas, escalas, presenças, pagamentos e relatórios |
 
 **🌐 Site publicado:** https://kelvin-garcia.netlify.app
 
@@ -23,10 +23,10 @@ Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, 
 - **Hero ilustrado** com a arte personalizada, adaptada para desktop, tablet e celular sem distorção e com o rosto sempre enquadrado.
 - **Animações de entrada** e elementos SVG complementares (faíscas, circuitos, código) com parallax sutil — respeitando `prefers-reduced-motion`.
 - **Trajetória** profissional e acadêmica em linha do tempo.
-- **Projetos** gerados a partir de um único arquivo de configuração, com capturas de tela, tecnologias e links de código, release, documentação e demonstração.
+- **Projetos** gerados a partir de um único arquivo de configuração, com capturas de tela, tecnologias e links de código, release, documentação e demonstração. Projetos com código privado (`private: true`) mostram só o sistema publicado e o indicador "Código privado"; o terminal abre a demonstração.
 - **Projeto em destaque** (FLOWRIX) com a identidade visual do próprio projeto (cor e símbolo), problema e solução, e **galeria** de capturas reais com visualização ampliada.
 - **Dados ao vivo do GitHub** (última release, data de atualização, estrelas) via API pública, sem token, com cache de 6 h. Se a API estiver indisponível ou limitada, o site continua mostrando as informações da configuração.
-- **Terminal interativo** (`help`, `sobre`, `projetos`, `abrir 1`, `stack`, `contato`…).
+- **Terminal interativo** (`help`, `sobre`, `projetos`, `abrir 1`, `stack`, `contato`…). `abrir n` abre o GitHub do projeto ou, se o código for privado, o sistema publicado.
 - **Contato** por e-mail (com botão de copiar) e GitHub.
 - **SEO e compartilhamento:** metadados, Open Graph/Twitter Card, JSON-LD, sitemap, favicon personalizado e imagem de prévia para o LinkedIn.
 - **Desempenho:** HTML estático gerado no build (funciona sem JavaScript), imagens AVIF/WebP responsivas (a ilustração caiu de 2,2 MB para ~20–70 KB), placeholder borrado e JS de ~4,5 KB gzip.
@@ -83,7 +83,7 @@ Para o `verify` com `chromium`, instale uma vez o navegador headless: `npx playw
      image: 'meu-projeto',                    // opcional
      release: 'v1.0.0',                       // opcional
      // opcionais — veja o FLOWRIX como exemplo completo:
-     // solution, docs, demo (URLs https), demoLabel, featured: true,
+     // private: true (código privado), solution, docs, demo (URLs https), demoLabel, featured: true,
      // brand: { color: '#E52435', logo: 'arquivo.svg' }, gallery: [{ file, alt }]
    },
    ```
