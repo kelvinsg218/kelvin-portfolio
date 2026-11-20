@@ -1,6 +1,6 @@
 # KELVIN.DEV — Kelvin Garcia · Creative Developer Portfolio
 
-> Da resolução de problemas à criação de soluções.
+> Tecnologia, criatividade e desenvolvimento.
 
 Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, implantação de sistemas e desenvolvimento de software: o **FLOWRIX**, plataforma web de automação de processos e integração de sistemas, o **ZENTRA**, sistema web de gestão de equipes e pessoas, e ferramentas para Windows que nasceram de problemas reais do dia a dia do suporte.
 
@@ -22,7 +22,7 @@ Portfólio pessoal interativo que apresenta minha trajetória em suporte de TI, 
 
 - **Hero ilustrado** com a arte personalizada, adaptada para desktop, tablet e celular sem distorção e com o rosto sempre enquadrado.
 - **Animações de entrada** e elementos SVG complementares (faíscas, circuitos, código) com parallax sutil — respeitando `prefers-reduced-motion`.
-- **Trajetória** profissional e acadêmica em linha do tempo.
+- **Perfil profissional**, **projetos** e **trajetória** profissional e acadêmica em linha do tempo, nessa ordem.
 - **Projetos** gerados a partir de um único arquivo de configuração, com capturas de tela, tecnologias e links de código, release, documentação e demonstração. Projetos com código privado (`private: true`) mostram só o sistema publicado e o indicador "Código privado"; o terminal abre a demonstração.
 - **Projeto em destaque** (FLOWRIX) com a identidade visual do próprio projeto (cor e símbolo), problema e solução, e **galeria** de capturas reais com visualização ampliada.
 - **Dados ao vivo do GitHub** (última release, data de atualização, estrelas) via API pública, sem token, com cache de 6 h. Se a API estiver indisponível ou limitada, o site continua mostrando as informações da configuração.

@@ -6,7 +6,7 @@ export function createCommands({ site, projects }) {
     help: () =>
       [
         'Comandos disponíveis:',
-        '  sobre      quem é Kelvin',
+        '  sobre      perfil profissional',
         '  projetos   lista os projetos',
         '  abrir <n>  abre o projeto n (GitHub ou sistema publicado)',
         '  stack      tecnologias que uso',
@@ -15,9 +15,9 @@ export function createCommands({ site, projects }) {
         '  clear      limpa o terminal',
       ].join('\n'),
     sobre: () =>
-      'Kelvin Garcia — suporte de TI e implantação de sistemas, estudante de Sistemas de Informação.\nTransformo problemas que vivi no suporte em ferramentas de software.',
-    whoami: () => 'kelvin — da resolução de problemas à criação de soluções.',
-    projetos: () => `${list}\n\nDigite "abrir 1" para ver o código do primeiro projeto.`,
+      'Kelvin Garcia — graduando em Sistemas de Informação, com experiência em suporte técnico N1/N2,\ninfraestrutura de TI e implantação de sistemas. Desenvolvimento de aplicações web e desktop:\nautomação de processos, integração de sistemas, gestão empresarial e monitoramento de ativos.',
+    whoami: () => 'kelvin — tecnologia, criatividade e desenvolvimento.',
+    projetos: () => `${list}\n\nDigite "abrir 1" para abrir o primeiro projeto.`,
     stack: () =>
       'Suporte: Windows · Redes/DHCP · Acesso remoto · Hardware e periféricos\nCódigo:  Python · C#/.NET · WPF · SQLite · JavaScript/Node.js · Git\nEstudando: Go · AWS · Azure',
     contato: () =>

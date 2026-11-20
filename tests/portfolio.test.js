@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { projects } from '../src/data/projects.js';
 import { site } from '../src/data/site.js';
 import { validateProject, renderProjectCard, renderProjects, esc } from '../src/lib/render.js';
@@ -193,5 +193,27 @@ describe('terminal', () => {
     expect(runCommand(cmds, '   ').text).toBe('');
     expect(runCommand(cmds, 'HELP').text).toContain('Comandos');
     expect(runCommand(cmds, 'clear').clear).toBe(true);
+  });
+});
+
+describe('conteúdo da página', () => {
+  const html = readFileSync('index.html', 'utf8');
+
+  it('segue a ordem: início, perfil profissional, projetos, trajetória, terminal e contato', () => {
+    const ids = ['inicio', 'sobre', 'projetos', 'trajetoria', 'terminal', 'contato'].map((id) => html.indexOf(`id="${id}"`));
+    expect(ids.slice(1).every((i) => i > 0)).toBe(true);
+    expect([...ids.slice(1)].sort((a, b) => a - b)).toEqual(ids.slice(1));
+    const nav = html.slice(html.indexOf('<nav'), html.indexOf('</nav>')).match(/href="#\w+"/g);
+    expect(nav).toEqual(['href="#sobre"', 'href="#projetos"', 'href="#trajetoria"', 'href="#terminal"', 'href="#contato"']);
+  });
+
+  it('usa os textos profissionais do início e do perfil', () => {
+    expect(site.headline).toBe('Tecnologia, criatividade e desenvolvimento.');
+    expect(site.subheadline).toBe('Desenvolvimento de software, automação de processos e integração de sistemas.');
+    expect(site.subheadline).not.toContain(site.name);
+    expect(html).toContain('Tecnologia, criatividade e <em>desenvolvimento.</em>');
+    expect(html).toContain('01 · Perfil profissional');
+    expect(html).toContain('Desenvolvimento de software e soluções digitais.');
+    expect(html).not.toMatch(/Aprendi tecnologia|Comecei na TI|resolução de problemas/);
   });
 });

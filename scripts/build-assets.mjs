@@ -64,8 +64,8 @@ await sharp(Buffer.from(faviconSvg)).resize(512, 512).png().toFile(out('icon-512
 await mkdir(path.join(root, 'publicacao', 'imagens'), { recursive: true });
 const og = await composeBanner(1200, 630, {
   title: 'KELVIN.DEV',
-  line1: 'Da resolução de problemas',
-  line2: 'à criação de soluções.',
+  line1: 'Tecnologia, criatividade',
+  line2: 'e desenvolvimento.',
   footer: 'Kelvin Garcia — Creative Developer Portfolio',
 });
 await sharp(og).jpeg({ quality: 86, mozjpeg: true }).toFile(out('og-image.jpg'));
